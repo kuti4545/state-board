@@ -32,6 +32,8 @@ jobs:
           BOARD_PASSWORD: ${{ secrets.BOARD_PASSWORD }}
           MIN_POPCOUNT: "6"
           MIN_COMBO: "0.72"
+          MAX_SYMBOLS: "150"
+          MIN_VOLUME: "1500000"
         run: python scan.py
       - name: Kaydet
         run: |
