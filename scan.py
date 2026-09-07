@@ -28,7 +28,14 @@ def get_tickers():
     r.raise_for_status()
     rows = r.json().get("data") or []
     out = []
-    skip = {"SPYUSDT", "TSLAUSDT", "NVDAUSDT", "SOXLUSDT", "SOXSUSDT"}
+    skip = {
+        "SPYUSDT", "TSLAUSDT", "NVDAUSDT", "SOXLUSDT", "SOXSUSDT",
+        "AAPLUSDT", "MSFTUSDT", "AMZNUSDT", "METAUSDT", "GOOGUSDT",
+        "MSTRUSDT", "COINUSDT", "CRCLUSDT", "SPCXUSDT", "SAMSUNGUSDT",
+        "SNDKUSDT", "MUUSDT", "SKHYUSDT", "SKHYNIXUSDT", "AMDUSDT",
+        "INTCUSDT", "TQQQUSDT", "QQQUSDT", "JP225USDT", "NAS100USDT",
+        "US30USDT", "XAUUSDT", "XAGUSDT", "CLUSDT",
+    }
     for row in rows:
         try:
             vol = float(row.get("usdtVolume") or 0)
