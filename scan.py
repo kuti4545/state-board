@@ -90,15 +90,15 @@ def scan_one(row):
         signal = side
     return {
         "symbol": symbol,
-        "price": price,
-        "change24h": round(chg, 2),
-        "volume": vol,
+        "price": float(price),
+        "change24h": round(float(chg), 2),
+        "volume": float(vol),
         "side": side,
-        "state": state,
-        "pop": pop,
-        "weight": weight,
-        "combo": combo,
-        "mods": mods,
+        "state": int(state),
+        "pop": int(pop),
+        "weight": float(weight),
+        "combo": float(combo),
+        "mods": {k: bool(v) for k, v in mods.items()},
         "signal": signal,
     }
 
@@ -153,7 +153,10 @@ def main():
         "rows": rows,
     }
     Path("docs").mkdir(parents=True, exist_ok=True)
-    Path(config.DATA_PATH).write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    Path(config.DATA_PATH).write_text(
+        json.dumps(payload, ensure_ascii=False, default=str),
+        encoding="utf-8",
+    )
     Path(config.HTML_PATH).write_text(render_html(payload), encoding="utf-8")
 
     prev = {}
